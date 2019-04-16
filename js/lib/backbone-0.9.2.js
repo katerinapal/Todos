@@ -1,11 +1,4 @@
-//     Backbone.js 0.9.2
-
-//     (c) 2010-2012 Jeremy Ashkenas, DocumentCloud Inc.
-//     Backbone may be freely distributed under the MIT license.
-//     For all details and documentation:
-//     http://backbonejs.org
-
-(function(){
+var bindingVariable = (function(){
 
   // Initial Setup
   // -------------
@@ -1429,3 +1422,5 @@
   };
 
 }).call(this);
+
+export default bindingVariable;
