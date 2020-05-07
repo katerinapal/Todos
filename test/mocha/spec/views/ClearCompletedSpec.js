@@ -4,12 +4,10 @@ describe('View :: Clear Completed', function() {
 
   beforeEach(function(done) {
     var that = this;
-    require(['models/Todo', 'views/ClearCompleted'], function(Todo, View) {
-      that.todos = new Todo.Collection();
-      that.view = new View({collection: that.todos});
-      $('#sandbox').html(that.view.render().el);
-      done();
-    });
+    that.todos = new Todo.Collection();
+    that.view = new View({collection: that.todos});
+    $('#sandbox').html(that.view.render().el);
+    done();
   });
 
   afterEach(function() {

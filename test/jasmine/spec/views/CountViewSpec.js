@@ -1,21 +1,19 @@
+import { View } from "..\\..\\..\\..\\js\\views\\CountView.js";
 describe('View :: Count Remaining Items', function() {
 
   beforeEach(function() {
     var flag = false,
         that = this;
 
-    require(['models/Todo', 'views/CountView'], function(Todo, View) {
-      that.todos = new Todo.Collection();
-      that.view = new View({collection: that.todos});
-      that.mockData = { title: 'Foo Bar', timestamp: new Date().getTime() };
-      $('#sandbox').html(that.view.render().el);
-      flag = true;
-    });
+    that.todos = new Todo.Collection();
+    that.view = new View({collection: that.todos});
+    that.mockData = { title: 'Foo Bar', timestamp: new Date().getTime() };
+    $('#sandbox').html(that.view.render().el);
+    flag = true;
 
     waitsFor(function() {
       return flag;
     });
-
   });
 
   afterEach(function() {

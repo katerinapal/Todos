@@ -1,37 +1,37 @@
-define(['backbone'], function(Backbone) {
+import Backbone from "..\\lib\\backbone-0.9.2.js";
 
-  var template = '\
-    <a href="#" class="icon-checkbox"></a>\
-    <span>Mark all as complete</label>\
-  ';
+var template = '\
+  <a href="#" class="icon-checkbox"></a>\
+  <span>Mark all as complete</label>\
+';
 
-  var View = Backbone.View.extend({
-    className: 'markAll',
-    initialize: function() {
-      this.collection.on('change:completed', this.toggleChecked, this);
-      this.collection.on('reset add remove', this.render, this);
-      this.$el.html(template).hide();
-      this.$button = this.$('.icon-checkbox');
-    },
-    render: function() {
-      this.$el.toggle(this.collection.size() > 0);
+var View = Backbone.View.extend({
+  className: 'markAll',
+  initialize: function() {
+    this.collection.on('change:completed', this.toggleChecked, this);
+    this.collection.on('reset add remove', this.render, this);
+    this.$el.html(template).hide();
+    this.$button = this.$('.icon-checkbox');
+  },
+  render: function() {
+    this.$el.toggle(this.collection.size() > 0);
+    this.toggleChecked();
+    return this;
+  },
+  toggleChecked: function() {
+    var hasRemaining = this.collection.size() > 0 && !this.collection.remaining().length;
+    this.$button.toggleClass('checked', hasRemaining);
+    return this;
+  },
+  events: {
+    'click': function(e) {
+      e.preventDefault();
+      var checked = !this.$button.hasClass("checked");
+      this.collection.each( function(todo){ todo.save({'completed': checked}); } );
       this.toggleChecked();
-      return this;
-    },
-    toggleChecked: function() {
-      var hasRemaining = this.collection.size() > 0 && !this.collection.remaining().length;
-      this.$button.toggleClass('checked', hasRemaining);
-      return this;
-    },
-    events: {
-      'click': function(e) {
-        e.preventDefault();
-        var checked = !this.$button.hasClass("checked");
-        this.collection.each( function(todo){ todo.save({'completed': checked}); } );
-        this.toggleChecked();
-      }
     }
-  });
-
-  return View;
+  }
 });
+
+var exported_View = View;
+export { exported_View as View };

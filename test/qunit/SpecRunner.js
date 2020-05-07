@@ -1,3 +1,7 @@
+import QUnit from ".\\spec\\models\\TodoSpec.js";
+import Backbone from "..\\..\\js\\lib\\backbone.localStorage.js";
+import $ from "..\\..\\js\\lib\\jquery-1.8.0.js";
+import _ from "..\\..\\js\\lib\\underscore-1.4.2.js";
 require.config({
   baseUrl: "/js/",
   urlArgs: 'cb=' + Math.random(),
@@ -34,23 +38,17 @@ require.config({
 
 window.store = "TestStore"; // override local storage store name - for testing
 
-require(['underscore', 'jquery', 'backbone.localStorage', 'qunit', 'sinon'], function(_, $, Backbone, QUnit, sinon){
+var specs = [];
 
-  var specs = [];
+specs.push('spec/models/TodoSpec');
+specs.push('spec/views/ClearCompletedSpec');
+specs.push('spec/views/CountViewSpec');
+specs.push('spec/views/FooterViewSpec');
+specs.push('spec/views/MarkAllSpec');
+specs.push('spec/views/NewTaskSpec');
+specs.push('spec/views/TaskListSpec');
+specs.push('spec/views/TaskViewSpec');
 
-  specs.push('spec/models/TodoSpec');
-  specs.push('spec/views/ClearCompletedSpec');
-  specs.push('spec/views/CountViewSpec');
-  specs.push('spec/views/FooterViewSpec');
-  specs.push('spec/views/MarkAllSpec');
-  specs.push('spec/views/NewTaskSpec');
-  specs.push('spec/views/TaskListSpec');
-  specs.push('spec/views/TaskViewSpec');
-
-  $(function(){
-    require(specs, function(){
-      // nothing to do here
-    });
-  });
-
+$(function(){
+  ;
 });

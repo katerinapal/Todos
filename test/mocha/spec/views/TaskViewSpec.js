@@ -1,16 +1,15 @@
+import View from "..\\..\\..\\qunit\\spec\\views\\TaskViewSpec.js";
 describe('View :: Task View', function() {
 
   var mockData = { title: 'Foo Bar', timestamp: new Date().getTime(), completed: true };
 
   beforeEach(function(done) {
     var that = this;
-    require(['models/Todo', 'views/TaskView'], function(Todo, View) {
-      that.todo = new Todo.Model(mockData);
-      that.todo.sync = function(){};
-      that.view = new View({model: that.todo});
-      $('#sandbox').html(that.view.render().el);
-      done();
-    });
+    that.todo = new Todo.Model(mockData);
+    that.todo.sync = function(){};
+    that.view = new View({model: that.todo});
+    $('#sandbox').html(that.view.render().el);
+    done();
   });
 
 

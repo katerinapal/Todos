@@ -1,15 +1,14 @@
+import { View } from "..\\..\\..\\..\\js\\views\\TaskList.js";
 describe('View :: Task List', function() {
 
   var mockData = { title: 'Foo Bar', timestamp: new Date().getTime(), completed: false};
 
   beforeEach(function(done) {
     var that = this;
-    require(['models/Todo', 'views/TaskList'], function(Todo, View) {
-      that.todos = new Todo.Collection();
-      that.view = new View({collection: that.todos});
-      $('#sandbox').html(that.view.render().el);
-      done();
-    });
+    that.todos = new Todo.Collection();
+    that.view = new View({collection: that.todos});
+    $('#sandbox').html(that.view.render().el);
+    done();
   });
 
   afterEach(function() {

@@ -1,3 +1,4 @@
+import { View } from "..\\..\\..\\..\\..\\js\\views\\task\\TaskView.js";
 describe('View :: Task View', function() {
 
   var mockData = { title: 'Foo Bar', timestamp: new Date().getTime(), completed: true };
@@ -6,18 +7,15 @@ describe('View :: Task View', function() {
     var flag = false,
         that = this;
 
-    require(['models/Todo', 'views/task/TaskView'], function(Todo, View) {
-      that.todo = new Todo.Model(mockData);
-      that.todo.sync = function(){};
-      that.view = new View({model: that.todo});
-      $('#sandbox').html(that.view.render().el);
-      flag = true;
-    });
+    that.todo = new Todo.Model(mockData);
+    that.todo.sync = function(){};
+    that.view = new View({model: that.todo});
+    $('#sandbox').html(that.view.render().el);
+    flag = true;
 
     waitsFor(function() {
       return flag;
     });
-
   });
 
   afterEach(function() {

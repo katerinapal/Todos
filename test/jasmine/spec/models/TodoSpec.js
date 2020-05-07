@@ -1,3 +1,4 @@
+var todos;
 describe('Model :: Todo', function() {
 
   var mockData = { title: 'Foo Bar', timestamp: new Date().getTime() };
@@ -6,16 +7,13 @@ describe('Model :: Todo', function() {
     var that = this,
         done = false;
 
-    require(['models/Todo'], function(Todo) {
-      that.todos = new Todo.Collection();
-      that.todo = new Todo.Model();
-      done = true;
-    });
+    that.todos = new Todo.Collection();
+    that.todo = new Todo.Model();
+    done = true;
 
     waitsFor(function() {
       return done;
     }, "Create Models");
-
   });
 
   afterEach(function(){

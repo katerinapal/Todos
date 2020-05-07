@@ -1,3 +1,6 @@
+import $ from "..\\..\\js\\lib\\jquery-1.8.0.js";
+import _ from "..\\..\\js\\lib\\underscore-1.4.2.js";
+export var globalStore;
 require.config({
   baseUrl: "/js/",
   urlArgs: 'cb=' + Math.random(),
@@ -35,32 +38,30 @@ require.config({
   }
 });
 
-window.store = "TestStore"; // override local storage store name - for testing
+globalStore = "TestStore"; // override local storage store name - for testing
 
-require(['underscore', 'jquery', 'mocha', 'chai', 'sinon'], function(_, $, mocha, chai, sinon) {
+// Chai
+this.assert = chai.assert;
+this.expect = chai.expect;
 
-  // Chai
-  this.assert = chai.assert;
-  this.expect = chai.expect;
+// Mocha
+mocha.setup({ui: 'bdd', ignoreLeaks: true});
 
-  // Mocha
-  mocha.setup({ui: 'bdd', ignoreLeaks: true});
+var specs = [];
 
-  var specs = [];
+specs.push('spec/models/TodoSpec');
+specs.push('spec/views/ClearCompletedSpec');
+specs.push('spec/views/CountViewSpec');
+specs.push('spec/views/FooterViewSpec');
+specs.push('spec/views/MarkAllSpec');
+specs.push('spec/views/NewTaskSpec');
+specs.push('spec/views/TaskListSpec');
+specs.push('spec/views/TaskViewSpec');
 
-  specs.push('spec/models/TodoSpec');
-  specs.push('spec/views/ClearCompletedSpec');
-  specs.push('spec/views/CountViewSpec');
-  specs.push('spec/views/FooterViewSpec');
-  specs.push('spec/views/MarkAllSpec');
-  specs.push('spec/views/NewTaskSpec');
-  specs.push('spec/views/TaskListSpec');
-  specs.push('spec/views/TaskViewSpec');
-
-  require(specs, function(){
-    $(function(){
-      mocha.run();//.globals(['Backbone']);
-    });
-  });
-
+$(function(){
+  mocha.run();//.globals(['Backbone']);
 });
+
+export function setGlobalStore(value) {
+  globalStore = value;
+}

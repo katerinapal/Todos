@@ -1,16 +1,15 @@
+import { View } from "..\\..\\..\\..\\js\\views\\MarkAll.js";
 describe('View :: Mark All As Completed', function() {
 
   var mockData = { title: 'Foo Bar', timestamp: new Date().getTime() }, completedMock = _.extend({completed: true}, mockData);
 
   beforeEach(function(done) {
     var that = this;
-    require(['models/Todo', 'views/MarkAll'], function(Todo, View) {
-      that.todos = new Todo.Collection();
-      that.view = new View({collection: that.todos});
-      $('#sandbox').html(that.view.render().el);
-      that.$checkbox = that.view.$(".icon-checkbox");
-      done();
-    });
+    that.todos = new Todo.Collection();
+    that.view = new View({collection: that.todos});
+    $('#sandbox').html(that.view.render().el);
+    that.$checkbox = that.view.$(".icon-checkbox");
+    done();
   });
 
   afterEach(function() {

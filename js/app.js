@@ -1,3 +1,6 @@
+import Backbone from ".\\lib\\backbone-0.9.2.js";
+import $ from ".\\lib\\jquery-1.8.0.js";
+import { View as MasterView } from ".\\views\\MasterView.js";
 require.config({
   baseUrl: "./js/",
   paths: {
@@ -21,50 +24,46 @@ require.config({
   }
 });
 
-require([
-    'jquery',
-    'backbone',
-    'models/Todo',
-    'views/MasterView'
-  ], function($, Backbone, Todo, MasterView ) {
+var Router = Backbone.Router.extend({
+  routes: {
+    "": "main"
+  },
 
-  var Router = Backbone.Router.extend({
-    routes: {
-      "": "main"
-    },
-
-    main: function(){
-      var tasks = new Todo.Collection();
-      var view = new MasterView({collection: tasks});
-      tasks.fetch({
-        success: function(tasks){
-          $("#container").html(view.render().el).show();
-        },
-        error: function(model, error) {
-          // TODO: handle errors nicer
-          alert(error);
-        }
-      });
-    }
-  });
-
-  // Preload CSS Sprite
-  $('<img/>').attr('src', "./css/glyphicons.png");
-
-  var router = new Router();
-  Backbone.history.start();
- 
+  main: function(){
+    var tasks = new Todo.Collection();
+    var view = new MasterView({collection: tasks});
+    tasks.fetch({
+      success: function(tasks){
+        $("#container").html(view.render().el).show();
+      },
+      error: function(model, error) {
+        // TODO: handle errors nicer
+        alert(error);
+      }
+    });
+  }
 });
 
+// Preload CSS Sprite
+$('<img/>').attr('src', "./css/glyphicons.png");
 
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-166608-8']);
-      _gaq.push(['_trackPageview']);
+var router = new Router();
+Backbone.history.start();
 
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
+
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-166608-8']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+var exported_anonymus = anonymus;
+export { exported_anonymus as anonymus };
+var exported__gaq = _gaq;
+export { exported__gaq as _gaq };
 
     

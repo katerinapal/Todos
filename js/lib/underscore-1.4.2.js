@@ -1,9 +1,4 @@
-//     Underscore.js 1.4.2
-//     http://underscorejs.org
-//     (c) 2009-2012 Jeremy Ashkenas, DocumentCloud Inc.
-//     Underscore may be freely distributed under the MIT license.
-
-(function() {
+var libraryObj_underscore142 = (function() {
 
   // Baseline setup
   // --------------
@@ -1198,3 +1193,5 @@
   });
 
 }).call(this);
+
+export default libraryObj_underscore142;

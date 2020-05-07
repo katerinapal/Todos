@@ -1,14 +1,13 @@
+import Todo from "..\\..\\..\\qunit\\spec\\models\\TodoSpec.js";
 describe('Model :: Todo', function() {
 
   var todos, todo, mockData = { title: 'Foo Bar', timestamp: new Date().getTime() };
 
   beforeEach(function(done) {
     var that = this;
-    require(['models/Todo'], function(Todo) {
-      that.todos = new Todo.Collection();
-      that.todo = new Todo.Model();
-      done();
-    });
+    that.todos = new Todo.Collection();
+    that.todo = new Todo.Model();
+    done();
   });
 
   afterEach(function(done){

@@ -1,15 +1,14 @@
+import { View } from "..\\..\\..\\..\\js\\views\\FooterView.js";
 describe('View :: Footer', function() {
 
   var mockData = { title: 'Foo Bar', timestamp: new Date().getTime(), completed: true };
 
   beforeEach(function(done) {
     var that = this;
-    require(['models/Todo', 'views/FooterView'], function(Todo, View) {
-      that.todos = new Todo.Collection();
-      that.view = new View({collection: that.todos});
-      $('#sandbox').html(that.view.render().el);
-      done();
-    });
+    that.todos = new Todo.Collection();
+    that.view = new View({collection: that.todos});
+    $('#sandbox').html(that.view.render().el);
+    done();
   });
 
   afterEach(function() {
